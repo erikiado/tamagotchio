@@ -3,7 +3,7 @@ import axiosApi, { parseFiberResponse } from '../../services/AxiosInstance';
 import axios from 'axios';
 
 import {
-  User, Metric, RecipeStage, UserLoginPayload, UserSession, UserVerificationPayload, UserSubscribePayload
+  User, UserLoginPayload, UserSession, UserVerificationPayload
 } from '../types';
 // import { AUTH_SERVICE } from '../../constants';
 const AUTH_SERVICE = "http://localhost:3000/"
@@ -20,11 +20,6 @@ const AUTH_SERVICE = "http://localhost:3000/"
 // "/update-username"
 // "/reset-password"
 
-export async function subscribeUserRequest(userData: UserSubscribePayload): Promise<{data:any}> {
-  const response = await axiosApi.post(AUTH_SERVICE + "/auth/subscribe", userData)
-  const userLoginResponse = parseFiberResponse(response, 201);
-  return userLoginResponse.data;
-}
 
 export async function loginUserRequest(userData: UserLoginPayload): Promise<UserSession> {
   const response = await axiosApi.post(AUTH_SERVICE + "/auth/login", userData)
@@ -51,27 +46,9 @@ export async function refreshUserRequest(): Promise<UserSession> {
   return userLoginResponse.data;
 }
 
-// export async function getKitchensRequest(): Promise<{ kitchens:Kitchen[] }> {
-//   const response = await axiosApi.get(AUTH_SERVICE + "/kitchens");
-//   const kitchensResponse = await parseFiberResponse(response, 200);  
-//   return kitchensResponse.data;
-// }
-
-// export async function createKitchenRequest(kitchenData: KitchenRequest): Promise<{ data: number }> {
-//   const response = await axiosApi.post(AUTH_SERVICE + "/kitchen/create", kitchenData)
-//   const kitchenCreatedResponse = parseFiberResponse(response, 201);
-//   return kitchenCreatedResponse.data;
-// }
-
 
 export async function getUsersRequest(): Promise<{ users:User[] }> {
   const response = await axiosApi.get(AUTH_SERVICE + "/users");
   const usersResponse = await parseFiberResponse(response, 200);
   return usersResponse.data;
-}
-
-export async function getMetricsRequest(): Promise<{ metrics:Metric[] }> {
-  const response = await axiosApi.get(AUTH_SERVICE + "/metrics");
-  const metricsResponse = await parseFiberResponse(response, 200);
-  return metricsResponse.data;
 }

@@ -2,12 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import type { AppState, AppThunk } from '../store'
 
-import {
-  Kitchen, KitchenRequest, Recipe, RecipeRequest, RecipeStageRequest, 
-  Device, DeviceRequest, Menu, MenuRequest, RecipeLikeRequest,
-  Mix, MixRequest, Input, InputRequest, User, Metric, RecipeStage, RecipeDraft, UploadData, RecipeInputsRequest, Flavor, Label, Origin
-} from '../types';
-
 import { parseChatResponse } from '../../services/utils';
 import { 
   chatRequest

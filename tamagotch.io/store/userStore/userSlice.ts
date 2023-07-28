@@ -3,8 +3,8 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import type { AppState, AppThunk } from '../store'
 // import { fetchUser } from './userAPI'
-import { UserLoginPayload, UserSubscribePayload, UserVerificationPayload } from '../types'
-import { loginUserRequest, signUpUserRequest, refreshUserRequest, verifyUserRequest, subscribeUserRequest } from './userAPI'
+import { UserLoginPayload, UserVerificationPayload } from '../types'
+import { loginUserRequest, signUpUserRequest, refreshUserRequest, verifyUserRequest } from './userAPI'
 
 export interface UserState {
   email: string
@@ -27,17 +27,6 @@ const initialState: UserState = {
     status: 'idle',
   }
 }
-
-
-export const subscribeUser = createAsyncThunk(
-  'admin/subscribeUser',
-  async (userData: UserSubscribePayload) => {
-    const response = await subscribeUserRequest(userData)
-    // The display we return becomes the `fulfilled` action payload
-    return response;
-  }
-)
-
 
 export const loginUser = createAsyncThunk(
   'admin/loginUser',
@@ -91,13 +80,6 @@ export const userSlice = createSlice({
   
   extraReducers: (builder) => {
     builder
-
-      .addCase(subscribeUser.pending, (state) => {
-        state.context.status = 'loading'
-      })
-      .addCase(subscribeUser.fulfilled, (state, action) => {
-        state.context.status = 'idle'
-      })
 
       .addCase(loginUser.pending, (state) => {
         state.context.status = 'loading'

@@ -11,7 +11,7 @@ import useKeyPress from '../hooks/useKeyPress';
 
 import { useAppSelector, useAppDispatch } from '../hooks/useRedux'
 import {
-  refreshUser, selectUser, subscribeUser
+  refreshUser, selectUser
 } from '../store/userStore/userSlice'
 import { chat, selectChat, updateChatInput} from '../store/chatStore/chatSlice'
 
@@ -33,29 +33,12 @@ export default function Home() {
   const chatHistoryRef = useRef(null);
 
   useEffect(() => {
-    // const accessToken = getFromStorage("accessToken");
-    // dispatch(refreshUser())
-    // if(accessToken === 'null'){
-      // console.log("no hay usuario")
-    // }else 
     console.log(alreadyRequested);
     if(!alreadyRequested){
       setAlreadyRequested(true);
       dispatch(chat(""))
-      // dispatch(getRandomRecipeSlug(""))
     }
   }, [alreadyRequested]);
-
-  // useEffect(() => {
-  //   if(recipeContext.randomSlug){
-  //     dispatch(getRecipeBySlug(recipeContext.randomSlug))
-  //     if(chatState.history.length == 0){
-  //       dispatch(chat(""))
-  //     }
-  //   }
-
-  // }, [recipeContext.randomSlug])
-
 
 
   useEffect(() => {
@@ -63,19 +46,6 @@ export default function Home() {
       clickSendChat();
     }
   }, [enterPressed]);
-
-  useEffect(() => {
-    // console.log("history:", chatState.history);
-    if(chatState.status === 'idle' && chatHistoryRef.current){
-      // chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
-    }
-    if(chatState.history.length > 0 && chatState.status === 'idle' && chatHistoryRef.current){
-      // clickSendChat();
-      console.log("chatHistoryRef")
-      // console.log(chatHistoryRef)
-      // console.log(chatHistoryRef.current)
-    }
-  }, [chatState]);
 
   const clickSendChat = () => {
     dispatch(chat(chatState.input));
@@ -85,7 +55,6 @@ export default function Home() {
     // setChatInput(e.target.value);
     dispatch(updateChatInput(e.target.value));
   }
-
 
   const formatMessage = (message:string) => {
     const wordList = message.split(" ")
@@ -101,13 +70,11 @@ export default function Home() {
       }
       finalWords.push(w);
     }
-    // const finalString = finalWords.join(" ")
     const finalList = [];
 
     let currentLargeString = "";
     for (let i = 0; i < finalWords.length; i++) {
       const element = finalWords[i];
-      // console.log(typeof(element));
       if(typeof(element) === 'string'){
         currentLargeString += element + " ";
       } else {
@@ -131,7 +98,7 @@ export default function Home() {
         </h1>
         <div id="chatContainer" className={styles.chatContainer}>
           <div id="chatWrapper" className={styles.chatWrapper}>
-            {/*  */}
+
             <div className={styles.chatHistoryWrapper} ref={chatHistoryRef}>
               {chatState.history.map((c:any, idx:any)=>{
                 if(c){
@@ -147,7 +114,6 @@ export default function Home() {
                 }
               })}
             </div>
-            {/*  */}
             
             <div id="chatLog" className={styles.chatLog}>
             </div>
