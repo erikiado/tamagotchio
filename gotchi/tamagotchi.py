@@ -62,7 +62,7 @@ def chat():
     )
 
     llm = ChatOpenAI(temperature=0.7, verbose=True)
-    # llm = OpenAI(temperature=0.9)
+    
     PROMPT = PromptTemplate(input_variables=["chat_history", "input"], template=TEMPLATE)
 
     conversation = ConversationChain(
