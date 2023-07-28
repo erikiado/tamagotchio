@@ -3,8 +3,7 @@ import axiosApi, { parseFiberResponse } from '../../services/AxiosInstance';
 import axios from 'axios';
 
 export const currentEnv = process.env.NODE_ENV === "production" ? "dev" : "local"
-
-const CHAT_SERVICE = process.env.CHAT_SERVICE || "http://127.0.0.1:5000/";
+import { CHAT_SERVICE } from '../../constants';
 
 export async function chatRequest(prompt:string): Promise<{ answer: any }> {
   console.log({CHAT_SERVICE},"chatservice", process.env.CHAT_SERVICE, process.env)
